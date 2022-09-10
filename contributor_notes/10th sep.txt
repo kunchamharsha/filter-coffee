@@ -1,0 +1,10 @@
+Thinking of adding 2 services 
+
+- backend
+- ui
+
+- backend will be written on django because too lazy to learn a new language now.
+- Thinking of using sqlite to store configurations 
+- mysql for the db 
+
+
