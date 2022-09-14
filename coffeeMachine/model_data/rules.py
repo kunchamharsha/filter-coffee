@@ -12,5 +12,5 @@ class Rules(models.Model):
     ruleset= models.ForeignKey(Ruleset,on_delete=models.CASCADE)
     weightage = models.IntegerField(default=0)
     class Meta:
-        managed = False
+        managed = True
         db_table = 'rules'

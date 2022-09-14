@@ -11,10 +11,18 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 print(BASE_DIR)
+
+
+
+ENV = environ.Env()
+ENV.read_env(os.path.join(BASE_DIR, 'dev.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -31,13 +39,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'coffeeMachine.apps.CoffeemachineConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'coffeeMachine'
 ]
 
 MIDDLEWARE = [
@@ -75,10 +83,14 @@ WSGI_APPLICATION = 'filterCoffee.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     'default': {
+        'ENGINE': 'django.db.backends.mysql' if DEBUG else 'django_prometheus.db.backends.mysql',
+        'HOST': ENV.str('MASTER_HOST'),
+        'NAME': ENV.str('MASTER_DB'),
+        'USER': ENV.str('MASTER_USER'),
+        'PASSWORD': ENV.str('MASTER_PASSWORD'),
+        'PORT': ENV.str('MASTER_PORT'),
+    },
 }
 
 

@@ -10,5 +10,5 @@ class Ruleset(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'rulesets'

@@ -8,5 +8,5 @@ class User(models.Model):
     is_disabled=models.BooleanField(default=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'users'
