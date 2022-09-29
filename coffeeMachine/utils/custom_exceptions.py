@@ -1,0 +1,2 @@
+class MissingParamsForRuleEvaluation(Exception):
+    pass

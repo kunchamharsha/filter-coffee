@@ -11,6 +11,7 @@ class Rules(models.Model):
     fields = models.JSONField()
     ruleset= models.ForeignKey(Ruleset,on_delete=models.CASCADE)
     weightage = models.IntegerField(default=0)
+    payload = models.JSONField(null=True)
     class Meta:
         managed = True
         db_table = 'rules'
