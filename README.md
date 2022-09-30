@@ -25,6 +25,13 @@ To Run the server
 
 > python3 manage.py run 
 
+Installation errors you might face 
+
+- NameError: name '_mysql' is not defined after setting change to mysql
+
+> export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$PATH"
+
+
 
 POSTMAN collection 
 - https://www.getpostman.com/collections/d7158f2ffcadad070596
