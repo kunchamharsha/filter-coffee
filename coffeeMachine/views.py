@@ -39,8 +39,6 @@ def evaluate_rules(request):
 
     try:
         payload = evaluate(service_id,input_params)
-        print("=")
-        print(payload)
         return JsonResponse({'result':payload}, content_type='application/json')
     except MissingParamsForRuleEvaluation as e:
         response = {
