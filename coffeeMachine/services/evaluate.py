@@ -22,3 +22,15 @@ def evaluate(service_id,params):
     sorted_rules = sorted(eligible_rules, key=lambda d: d.weightage) 
     payloads = [rule.payload for rule in sorted_rules]
     return payloads
+
+
+def list_tags(service_id):
+    service_id = App.objects.get(id=service_id)
+    ruleset=Ruleset.objects.get(service=service_id,active=True)
+    rules=Rules.objects.filter(ruleset=ruleset).all()
+    tags = []
+    for rule in rules:
+        tags.extend(rule.fields['fields'])
+    tags = set(tags)
+    tags = list(tags)
+    return tags

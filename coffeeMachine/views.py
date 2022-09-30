@@ -3,7 +3,7 @@ from signal import pause
 from telnetlib import STATUS
 from urllib import response
 from django.forms import JSONField
-from coffeeMachine.services.evaluate import evaluate
+from coffeeMachine.services.evaluate import evaluate,list_tags
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -49,6 +49,26 @@ def evaluate_rules(request):
         return JsonResponse(response,content_type='application/json',status=417)
     except Exception as e:
         return JsonResponse(str(e))
+
+@require_http_methods(
+    [
+        "GET",
+    ]
+)
+@csrf_exempt
+def list_tags_view(request):
+    service_id = request.GET.get('service_id')
+    try:
+        payload = list_tags(service_id)
+        return JsonResponse({'result':payload}, content_type='application/json')
+    except MissingParamsForRuleEvaluation as e:
+        response = {
+            'response':'missing rules for evaluation, update service_params'
+        }
+        return JsonResponse(response,content_type='application/json',status=417)
+    except Exception as e:
+        return JsonResponse(str(e))
+
 
 @require_http_methods(
     [
