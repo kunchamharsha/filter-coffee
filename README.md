@@ -15,7 +15,9 @@ Installation process for developers
 
 > pip3 install -r requirements.txt 
 
-> fill in sample.env values
+> create a new file dev.env 
+
+> fill in sample.env values in dev.env
 
 > python3 manage.py migrate // To install mysql tables 
 
