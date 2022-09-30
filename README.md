@@ -34,4 +34,4 @@ Installation errors you might face
 
 
 POSTMAN collection 
-- https://www.getpostman.com/collections/d7158f2ffcadad070596
+- https://www.getpostman.com/collections/516f5943a28a7a487530
