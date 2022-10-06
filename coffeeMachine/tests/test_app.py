@@ -1,3 +1,4 @@
+import copy
 from coffeeMachine.model_data.apps import App
 from coffeeMachine.model_data.users import User
 from rest_framework.test import APITestCase
@@ -17,14 +18,17 @@ class AppTest(APITestCase):
         "user":cls.user,
         "description":"app for payment integration-updation"
         }
+
         cls.app = App.objects.create(**cls._data)
         cls.app_manual = App.objects.create(name="payment sys-7",display_picture="image.png",user=cls.user,description="payment integration")
 
     
     def test_app_creation(self):
-
-        _response = self.client.post('/coffeemachine/app/',data=self._data,format="json")
-    
+        _data = copy.deepcopy(self._data)
+        _data['user'] = self.user.id
+        
+        _response = self.client.post('/coffeemachine/app/',data=_data,format="json")
+        print(_response.data)
         self.assertEqual(_response.status_code,status.HTTP_201_CREATED)
 
 
