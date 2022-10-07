@@ -7,24 +7,24 @@ services:
     ports:
       - '3308:3306'
     environment:
-       MYSQL_DATABASE: 'rule_engine'
-       MYSQL_PASSWORD: 'root'
-       MYSQL_ROOT_PASSWORD: '12345'
+       MYSQL_DATABASE: ${MASTER_DB}
+       MYSQL_USER: ${MASTER_USER}
+       MYSQL_ROOT_PASSWORD: ${MASTER_PASSWORD}
     volumes:
       - 'db:/var/lib/mysql'
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8001 
+    command: bash -c "python3 manage.py check && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8001" 
     volumes:
       - '.:/base_directory'
     ports:
       - "8001:8001"
     environment:
-       MYSQL_DATABASE: 'rule_engine'
-       MYSQL_PASSWORD: 'root'
-       MYSQL_ROOT_PASSWORD: '12345'
+       MYSQL_DATABASE: ${MASTER_DB}
+       MYSQL_USER: ${MASTER_USER}
+       MYSQL_ROOT_PASSWORD: ${MASTER_PASSWORD}
     depends_on:
       - db
 
