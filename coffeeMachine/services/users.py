@@ -1,11 +1,9 @@
-from models import Users
+from coffeeMachine.model_data.users import User
+from rest_framework import viewsets
 
-class UserService:
-    def create():
-        pass
-    def delete():
-        pass
-    def update():
-        pass
-    def update():
-        pass
+from coffeeMachine.serializers import UserSerializer
+
+class UserService(viewsets.ModelViewSet):
+    model = User
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
