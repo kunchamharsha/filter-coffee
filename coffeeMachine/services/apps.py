@@ -1,11 +1,9 @@
+from coffeeMachine.model_data.apps import App
+from rest_framework import viewsets
 
+from coffeeMachine.serializers import AppSerializer
 
-class AppService:
-    def create():
-        pass
-    def delete():
-        pass
-    def update():
-        pass
-    def update():
-        pass
+class AppService(viewsets.ModelViewSet):
+    model = App
+    serializer_class = AppSerializer
+    queryset = App.objects.all()
