@@ -33,5 +33,9 @@ Installation errors you might face
 
 
 
+- To create super user for django admin 
+
+> python manage.py createsuperuser
+
 POSTMAN collection 
 - https://www.getpostman.com/collections/516f5943a28a7a487530
